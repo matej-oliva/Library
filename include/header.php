@@ -20,7 +20,39 @@
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '{553606428650853}',
+              cookie     : true,
+              xfbml      : true,
+              version    : '{v7.0}'
+            });
+
+            FB.AppEvents.logPageView();   
+
+          };
+      
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "https://connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
         <header class="container bg-dark">
             <h1 class="text-white py-4 px-2">Půjčování knih</h1>
+            <?php
+            if(!empty($_SESSION['user_id'])){
+                echo '<strong>'.htmlspecialchars($_SESSION['user_name']).'</strong>';
+                echo ' - ';
+                echo '<a href="logout.php" class="text-white">odhlásit se</a>';
+            }else{
+                echo '<a href="login.php" class="text-white">přihlásit se</a>';
+            }
+            
+            
+            ?>
         </header>
         <main class="container">
