@@ -61,10 +61,10 @@
             if($checkPass1 !== $checkPass2){
                 $errors['password2']='Hesla se neshodují';
             }
-        #region kontrola hesla
+        #endregion kontrola hesla
 
         #region nastaveni knihovnika
-        if(!empty(@$_POST['librarian'])){
+        if(isset($_POST['librarian'])){
             $librarian = 1;
         }else{
             $librarian = 0;
@@ -77,7 +77,7 @@
         if(empty($errors)){
             $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
             
-            $query=$db->prepare('INSERT INTO users (firstName, lastName, email, password, librarian, active) VALUES (:firstName, :lastName, :email, :password, :librarian, 1);');
+            $query=$db->prepare('INSERT INTO library_users (first_name, last_name, email, password, librarian, active) VALUES (:firstName, :lastName, :email, :password, :librarian, 1);');
             $query->execute([
                 ':firstName'=>$firstName,
                 ':lastName'=>$lastName,
@@ -150,7 +150,7 @@
             <div class="checkbox">
                 <label>
                     <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                    <input id="librarian" type="checkbox" name="librarian" value="0" value="<?php echo htmlspecialchars(@$librarian);?>">
+                    <input id="librarian" type="checkbox" name="librarian" value="<?php echo htmlspecialchars(@$librarian);?>">
                     <span class="right">Jste knihovník?</span>
                 </label>
             </div>
