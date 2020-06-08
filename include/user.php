@@ -5,7 +5,7 @@
   require_once 'database.php';
 
   if (!empty($_SESSION['user_id'])){
-    $userQuery=$db->prepare('SELECT user_id FROM users WHERE user_id=:id AND active=1 LIMIT 1;');
+    $userQuery=$db->prepare('SELECT user_id FROM library_users WHERE user_id=:id AND active=1 LIMIT 1;');
     $userQuery->execute([
       ':id'=>$_SESSION['user_id']
     ]);
