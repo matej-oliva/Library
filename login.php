@@ -1,7 +1,37 @@
 <?php
+    require_once 'include/user.php';
+
+    if(!empty($_SESSION['user_id'])){
+        header('Location: index.php');
+        exit();
+    }
+
+    $errors = false;
+    if(!empty($_POST)){
+        $userQuery = $db->prepare('SELECT * FROM library_users WHERE email=:email LIMIT 1;');
+        $userQuery -> execute([
+            ':email'=>trim($_POST['email'])
+        ]);
+        if($user=$userQuery->fetch(PDO::FETCH_ASSOC)){
+            if(password_verify($_POST['password'],$user['password'])){
+                $_SESSION['user_id']=$user['user_id'];
+                $_SESSION['user_name']=$user['firstName'].' '.$user['lastName'];
+                header('Location: index.php');
+                exit();
+            }else{
+                $errors=true;
+            };
+        }else{
+            $errors=true;
+        };
+    
+    }
+
     $pageTitle='Přihlášení';
     include 'include/header.php';
 ?>
+
+<h2>Přihlášení uživatele</h2>
 
 <div class="login-form">
     <form action="/examples/actions/confirmation.php" method="post">
@@ -9,7 +39,10 @@
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="e-mail" required="required">				
+                <input id="email" type="email" class="form-control <?php echo ($errors?'is_invalid':''); ?>" name="email" placeholder="e-mail" required="required" value="<?php echo htmlspecialchars(@$_POST['email']) ?>">
+                <?php
+                    echo (!empty($errors['name'])?'<div class="invalid-feedback">Neplatná kombinace přihlašovacího e-mailu a hesla.</div>':'');
+                ?>				
             </div>
         </div>
     	<div class="form-group">
@@ -24,15 +57,15 @@
         <div class="clearfix">
             <a href="#" class="pull-right">Zapomenuté heslo?</a>
         </div>
-    	<div class="or-seperator"><i>nebo</i></div>
+    	<div class="or-seperator"><i>nebo se přihlaste přes</i></div>
         <div class="text-center social-btn">
             <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
         </div>
     </form>
-    <p class="text-center text-muted small">Nemáte ještě účet? <a href="#">Přihlaste se zde!</a></p>
+    <p class="text-center text-muted small">Nemáte ještě účet? <a href="registration.php">Zaregistrujte se zde!</a></p>
+    <p class="text-center text-muted small">Odejít na <a href="index.php">Domovskou stránku</a></p>
 </div> 
 
 <?php
 
     include 'include/footer.php';
-?>
