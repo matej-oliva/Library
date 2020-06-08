@@ -1,6 +1,6 @@
 <?php
 
-    require_once 'include/database.php';
+    require_once 'include/user.php';
 
     include 'include/header.php';
 
@@ -29,7 +29,7 @@
     }
 
     echo '<div class="row my-3">
-            <a href-"edit.php" class="btn btn-primary">Přidat rezervaci</a>
+            <a href="reservation_form.php" class="btn btn-primary">Přidat rezervaci</a>
             </div>';
 
 
