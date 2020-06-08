@@ -24,10 +24,6 @@ body {
     font-family: 'Oregano', cursive;
 }
 
-header span {
-    display: none;
-}
-
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -229,9 +225,6 @@ footer p{
         font-size: 48px;
         padding-bottom: 10px;
     }
-    header .fa-coffee {
-        font-size: 24px;
-    }
     img {
         width: 100%;
         height: 200px;
@@ -257,9 +250,6 @@ footer p{
     }
     header {
         font-size: 64px;
-    }
-    header .fa-coffee {
-        font-size: 42px;
     }
     img {
         width: 100%;
@@ -333,9 +323,6 @@ footer p{
         width: 100%;
         text-align: left;
         font-size: 12pt;
-    }
-    header span {
-        display: contents;
     }
     @page {
         size: auto;
