@@ -17,4 +17,3 @@
       exit();
     }
   }
-  #endregion kontrola, jestli je přihlášený uživatel platný

@@ -15,7 +15,7 @@
         if($user=$userQuery->fetch(PDO::FETCH_ASSOC)){
             if(password_verify($_POST['password'],$user['password'])){
                 $_SESSION['user_id']=$user['user_id'];
-                $_SESSION['user_name']=$user['firstName'].' '.$user['lastName'];
+                $_SESSION['user_name']=$user['first_name'].' '.$user['last_name'];
                 header('Location: index.php');
                 exit();
             }else{
@@ -34,12 +34,12 @@
 <h2>Přihlášení uživatele</h2>
 
 <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form method="post">
         <h2 class="text-center">Přihlásit se</h2>   
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input id="email" type="email" class="form-control <?php echo ($errors?'is_invalid':''); ?>" name="email" placeholder="e-mail" required="required" value="<?php echo htmlspecialchars(@$_POST['email']) ?>">
+                <input id="email" type="email" class="form-control <?php echo ($errors?'is_invalid':''); ?>" name="email" placeholder="e-mail" required="required" value="<?php echo htmlspecialchars(@$_POST['email']) ?>"/>
                 <?php
                     echo (!empty($errors['name'])?'<div class="invalid-feedback">Neplatná kombinace přihlašovacího e-mailu a hesla.</div>':'');
                 ?>				

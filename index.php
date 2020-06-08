@@ -28,9 +28,12 @@
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     }
 
-    echo '<div class="row my-3">
-            <a href="reservation_form.php" class="btn btn-primary">Přidat rezervaci</a>
-            </div>';
+
+    if(!empty($_SESSION['user_id'])){
+        echo '<div class="row my-3">
+        <a href="reservation_form.php" class="btn btn-primary">Přidat rezervaci</a>
+        </div>';
+    };
 
 
     include 'include/footer.php';
