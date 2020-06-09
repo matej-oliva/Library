@@ -1,6 +1,6 @@
 <?php
 require_once 'fb-user.php';
-require_once __DIR__ . '/include/facebook.php';
+require_once 'include/facebook.php';
 
 $fbHelper = $fb->getRedirectLoginHelper();
 
@@ -34,7 +34,7 @@ $query->execute([
 
 if ($query->rowCount() > 0) {
     $user = $query->fetch(PDO::FETCH_ASSOC);
-} else {
+}else{
     $query = $db->prepare('SELECT * FROM library_users WHERE email=:email LIMIT 1;');
     $query->execute([
         ':email' => $fbUserEmail
@@ -50,7 +50,7 @@ if ($query->rowCount() > 0) {
         ]);
 
     } else {
-        $insertQuery = $db->prepare('INSERT INTO library_users (name, email, facebook_id) VALUES (:name, :email, :facebookId);');
+        $insertQuery = $db->prepare('INSERT INTO library_users (first_name, last_name, email, facebook_id) VALUES (:name, :name, :email, :facebookId);');
         $insertQuery->execute([
             ':name' => $fbUserName,
             ':email' => $fbUserEmail,

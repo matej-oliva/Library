@@ -3,7 +3,7 @@
 session_start();
 
 require_once 'include/user.php';
-require_once __DIR__ . '/facebook/vendor/autoload.php';
+require_once 'facebook/vendor/autoload.php';
 
 if (!empty($_SESSION['user_id'])) {
     $userQuery = $db->prepare('SELECT user_id FROM library_users WHERE user_id=:id LIMIT 1;');
