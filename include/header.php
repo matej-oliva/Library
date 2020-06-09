@@ -45,14 +45,29 @@
             <h1 class="text-white py-4 px-2">Půjčování knih</h1>
             <?php
             if(!empty($_SESSION['user_id'])){
-                echo '<strong>'.htmlspecialchars($_SESSION['user_name']).'</strong>';
-                echo ' - ';
+                echo '<strong class="text-white">'.htmlspecialchars($_SESSION['user_name']).'</strong>';
+                echo '<span class="text-white"> - </span>';
                 echo '<a href="logout.php" class="text-white">odhlásit se</a>';
             }else{
                 echo '<a href="login.php" class="text-white">přihlásit se</a>';
             }
-            
-            
             ?>
+            <nav class="navbar navbar-dark bg-dark d-flex justify-content-around">
+                    <a id="nav-summary" class="btn btn-light px-4" href="#summary">
+                      <span class="fa fa-feather"></span>
+                      Knihy
+                    </a>
+
+                    <a id="nav-plan" class="btn btn-light px-4" href="#study-plan-page">
+                      <span class="fa fa-feather"></span>
+                      Vypůjčené knihy
+                    </a>
+                  
+                    <a id="nav-courses" class="btn btn-light px-4" href="#courses-page">
+                      <span class="fa fa-feather"></span>
+                      Profil
+                    </a>
+                  
+            </nav>
         </header>
         <main class="container">
