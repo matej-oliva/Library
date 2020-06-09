@@ -1,5 +1,6 @@
 <?php
     require_once 'include/user.php';
+    require_once 'include/facebook.php';
 
     if(!empty($_SESSION['user_id'])){
         header('Location: index.php');
@@ -26,6 +27,11 @@
         };
     
     }
+    $fbHelper = $fb->getRedirectLoginHelper();
+    $permissions = ['email'];
+    $callbackUrl = htmlspecialchars('https://eso.vse.cz/~olim02/Knihovna/fb-callback.php');
+
+    $fbLoginUrl = $fbHelper->getLoginUrl($callbackUrl, $permissions);
 
     $pageTitle='Přihlášení';
     include 'include/header.php';
@@ -59,7 +65,7 @@
         </div>
     	<div class="or-seperator"><i>nebo se přihlaste přes</i></div>
         <div class="text-center social-btn">
-            <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            <a href="<?php echo $fbLoginUrl; ?>" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
         </div>
     </form>
     <p class="text-center text-muted small">Nemáte ještě účet? <a href="registration.php">Zaregistrujte se zde!</a></p>

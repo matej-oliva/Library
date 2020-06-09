@@ -1,3 +1,8 @@
+    <footer class="bg-dark text-white text-center">
+    &copy;&nbsp;Matěj&nbsp;Oliva&nbsp;2020
+    <br>Vysoká škola ekonomická v Praze 
+    <br>Fakulta informatiky a statistiky
+    </footer>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
