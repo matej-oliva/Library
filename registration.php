@@ -76,10 +76,11 @@
         #region registrace uzivatele
         if(empty($errors)){
             $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
+            $name = $firstName.' '.$lastName;
             
             $query=$db->prepare('INSERT INTO library_users (name, email, password, librarian, active) VALUES (:name, :email, :password, :librarian, 1);');
             $query->execute([
-                ':name'=>$firstName.' '.$lastName,
+                ':name'=>$name,
                 ':email'=>$email,
                 ':password'=>$password,
                 ':librarian'=>$librarian
