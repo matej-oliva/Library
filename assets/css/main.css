@@ -16,6 +16,10 @@ main{
 ---------------BOOTSTRAP HELPER--------------------
 */
 
+.new_book-form {
+    width: 385px;
+    margin: auto;
+}
 .login-form {
     width: 385px;
     margin: auto;
