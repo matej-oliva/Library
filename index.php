@@ -20,9 +20,8 @@
 
     include 'include/header.php';
 ?>
-
+        <h2>Seznam knih</h2>
         <div class="col w-100 px-0">
-        
         <?php
         foreach($book_list as $book){
             $availableBooks = $book['bookMax'] - $book['bookLoaned'];
