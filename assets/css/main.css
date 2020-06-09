@@ -80,3 +80,6 @@ main{
 .right{
     text-align: right;
 }
+.no_underline:hover{
+    text-decoration: none;
+}
