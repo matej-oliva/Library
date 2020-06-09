@@ -39,9 +39,9 @@
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input id="email" type="email" class="form-control <?php echo ($errors?'is_invalid':''); ?>" name="email" placeholder="e-mail" required="required" value="<?php echo htmlspecialchars(@$_POST['email']) ?>"/>
+                <input id="email" type="email" class="form-control<?php echo($errors ? ' is-invalid' : ''); ?>" name="email" placeholder="e-mail" required="required" value="<?php echo htmlspecialchars(@$_POST['email']) ?>"/>
                 <?php
-                    echo (!empty($errors['name'])?'<div class="invalid-feedback">Neplatná kombinace přihlašovacího e-mailu a hesla.</div>':'');
+                    echo ($errors ? '<div class="invalid-feedback">Neplatná kombinace přihlašovacího e-mailu a hesla.</div>':'');
                 ?>				
             </div>
         </div>
