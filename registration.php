@@ -1,6 +1,7 @@
 <?php
 
     require_once 'include/user.php';
+    require_once 'include/facebook.php';
 
     if (!empty($_SESSION['user_id'])){
         header('Location: index.php');
@@ -98,6 +99,12 @@
         #endregion zpracovani formulare
     };
 
+    $fbHelper = $fb->getRedirectLoginHelper();
+    $permissions = ['email'];
+    $callbackUrl = htmlspecialchars('https://eso.vse.cz/~olim02/Knihovna/fb-callback.php');
+
+    $fbLoginUrl = $fbHelper->getLoginUrl($callbackUrl, $permissions);
+
     $pageTitle="Registrace nového uživatele";
 
     include 'include/header.php';
@@ -160,7 +167,7 @@
         </div>
 		<div class="or-seperator"><i>nebo se registrovat přes</i></div>
         <div class="text-center social-btn">
-            <a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            <a href="<?php echo $fbLoginUrl; ?>" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
         </div>
         <div class="or-seperator"></div>
         <div class="row">

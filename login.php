@@ -69,7 +69,6 @@
         </div>
     </form>
     <p class="text-center text-muted small">Nemáte ještě účet? <a href="registration.php">Zaregistrujte se zde!</a></p>
-    <p class="text-center text-muted small">Odejít na <a href="index.php">Domovskou stránku</a></p>
 </div> 
 
 <?php
