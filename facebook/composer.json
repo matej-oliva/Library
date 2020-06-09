@@ -1,12 +1,14 @@
 {
-  "require": {
-    "php": ">= 7.2",
-    "facebook/graph-sdk": "^5.7"
-  },
-  "minimum-stability": "stable",
-  "config": {
-    "platform": {
-      "php": "7.2"
+    "name": "oliva/Knihovna",
+    "description":"Aplikace pro evidenci vypůjčených knih",
+    "require": {
+        "php": ">= 7.2",
+        "facebook/graph-sdk": "^5.7"
+    },
+    "minimum-stability": "stable",
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
     }
-  }
 }
