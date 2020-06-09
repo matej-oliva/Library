@@ -18,9 +18,10 @@
     if(empty($book_list)){
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     };
+    $pageTitle="Vypůjčené knihy";
     include 'include/header.php';
 ?>
-
+        <h2>Vypůjčené knihy</h2>
         <div class="col text-white w-100 px-0 mx-0">
         <?php
             foreach($book_list as $book){
@@ -28,7 +29,7 @@
                 $expDateCZ = date("d. m. Y", strtotime($originalDate));
                 echo    '<div class="row border border-dark border-strong my-1 mx-0 py-1 w-100 bg-secondary text-white">';
                 echo    '  <div class="col">';
-                echo    '   <h5><span class="badge badge-secondary">'.htmlspecialchars($book['book_name']).'</span></h5>';
+                echo    '   <h4><span class="badge badge-secondary">'.htmlspecialchars($book['book_name']).'</span></h4>';
                 echo    '   <div class="align-bottom">'.nl2br(htmlspecialchars($book['bookAuthor'])).'</div>';
                 echo    '  </div>';
                 echo    '  <div class="col text-right">';

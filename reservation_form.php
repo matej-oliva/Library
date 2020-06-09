@@ -1,7 +1,6 @@
 <?php
 
     require_once 'include/user.php';
-    require_once 'admin_required.php';
 
     $errors=[];
     if(!empty($_POST)){

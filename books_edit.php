@@ -13,9 +13,15 @@
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     };
 
+    $pageTitle="Seznam knih";
     include 'include/header.php';
-?>
-
+?>      
+        <div class="row">
+            <h2 class="col">Správa knih</h2>
+            <form action="users.php" method="GET" class="col text-right py-2 mr-3">
+            <a href="new_book.php" class="btn btn-dark px-4">Přidat knihu</a>
+            </form>
+        </div>
         <div class="col w-100 px-0">
         
         <?
@@ -31,7 +37,7 @@
             echo '      <div class="col text-right">';
             echo '          <div class="small text-white mt-1">'.'Aktuálně&nbsp;dostupné:&nbsp;'.$availableBooks.'</div>';
             if(!empty($_SESSION['user_id'])){
-                echo '<div class="mt-2"><a href="reservation_form.php" class="btn btn-light px-4">Rezervovat</a></div>';
+                echo '<div class="mt-2"><a href="reservation_form.php" class="btn btn-light px-4">Upravit</a></div>';
             }
             echo '      </div>';
             echo '  </div>';

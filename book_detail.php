@@ -15,9 +15,11 @@
     if(empty($book_list)){
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     };
+
+    $pageTitle="Detail knihy";
     include 'include/header.php';
 ?>
-
+        <h2>Detail knihy</h2>
         <div class="col w-100 px-0">
             <?php
         foreach($book_list as $book){
