@@ -50,7 +50,7 @@ if ($query->rowCount() > 0) {
         ]);
 
     } else {
-        $insertQuery = $db->prepare('INSERT INTO library_users (first_name, last_name, email, facebook_id) VALUES (:name, :name, :email, :facebookId);');
+        $insertQuery = $db->prepare('INSERT INTO library_users (name, email, facebook_id) VALUES (:name, :email, :facebookId);');
         $insertQuery->execute([
             ':name' => $fbUserName,
             ':email' => $fbUserEmail,
@@ -67,7 +67,7 @@ if ($query->rowCount() > 0) {
 
 if (!empty($user)) {
     $_SESSION['user_id'] = $user['user_id'];
-    $_SESSION['user_name'] = $user['last_name'];
+    $_SESSION['user_name'] = $user['name'];
 }
 
 header('Location: index.php');
