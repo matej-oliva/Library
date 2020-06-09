@@ -1,5 +1,5 @@
 <?php
-require_once 'fb-user.php';
+require_once 'include/user.php';
 require_once 'include/facebook.php';
 
 $fbHelper = $fb->getRedirectLoginHelper();
@@ -43,10 +43,10 @@ if ($query->rowCount() > 0) {
     if ($query->rowCount() > 0) {
         $user = $query->fetch(PDO::FETCH_ASSOC);
 
-        $updateQuery = $db->prepare('UPDATE library_users SET facebook_id=:facebookId WHERE user_id=:id LIMTI 1;');
+        $updateQuery = $db->prepare('UPDATE library_users SET facebook_id=:facebookId WHERE user_id=:id LIMIT 1;');
         $updateQuery->execute([
             ':facebookId' => $fbUserId,
-            ':id' => $user['id']
+            ':id' => $user['user_id']
         ]);
 
     } else {
@@ -66,8 +66,8 @@ if ($query->rowCount() > 0) {
 }
 
 if (!empty($user)) {
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['user_name'] = $user['name'];
+    $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['user_name'] = $user['last_name'];
 }
 
 header('Location: index.php');
