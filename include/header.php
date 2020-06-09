@@ -72,7 +72,7 @@
                     </a>
                   
                     <a id="nav-courses" class="btn btn-light px-4" href="#courses-page">
-                      <span class="fa fa-feather"></span>
+                      <span class="fa fa-user"></span>
                       Profil
                     </a>';
                     };

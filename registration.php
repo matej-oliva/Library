@@ -77,10 +77,9 @@
         if(empty($errors)){
             $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
             
-            $query=$db->prepare('INSERT INTO library_users (first_name, last_name, email, password, librarian, active) VALUES (:firstName, :lastName, :email, :password, :librarian, 1);');
+            $query=$db->prepare('INSERT INTO library_users (name, email, password, librarian, active) VALUES (:name, :email, :password, :librarian, 1);');
             $query->execute([
-                ':firstName'=>$firstName,
-                ':lastName'=>$lastName,
+                ':name'=>$firstName.' '.$lastName,
                 ':email'=>$email,
                 ':password'=>$password,
                 ':librarian'=>$librarian
