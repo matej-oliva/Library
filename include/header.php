@@ -43,7 +43,7 @@
         </script>
         <header class="container bg-dark">
           <div class="row">
-            <h1 class="col text-white py-4 px-2">Knihovna</h1>
+            <h1 class="col text-white py-4 px-2"><a class="text-white no_underline" href="./index.php">Knihovna</a></h1>
             <?php
             echo '<div class="col py-4 px-2 text-right">';
             if(!empty($_SESSION['user_id'])){
@@ -61,7 +61,7 @@
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around">
                   <a id="nav-summary" class="btn btn-light px-4" href="books.php">
-                    <span class="fa fa-feather"></span>
+                    <span class="fa fa-book"></span>
                     Knihy
                   </a>
                   <?php
