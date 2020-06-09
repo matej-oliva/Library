@@ -45,7 +45,7 @@
             $checkPass1 = trim(@$_POST['password']);
             $checkPass2 = trim(@$_POST['password2']);
 
-            if (strlen($checkPass1 < '8')){
+            if (strlen($checkPass1)<8){
                 $errors['password'] = 'Vaše heslo musí obsahovat alespoň 8 znaků!';
             }
             elseif(!preg_match("#[0-9]+#",$checkPass1)) {
@@ -111,8 +111,8 @@
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input id="firstName" type="text" class="form-control" name="firstName" placeholder="Jméno" required="required" value="<?php echo htmlspecialchars(@$firstName);?>">				
-                <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Příjmení" required="required" value="<?php echo htmlspecialchars(@$lastName);?>">
+                <input id="firstName" type="text" class="form-control<?php echo(!empty($errors['firstName']) ? ' is-invalid' : ''); ?>" name="firstName" placeholder="Jméno" required="required" value="<?php echo htmlspecialchars(@$firstName);?>">				
+                <input id="lastName" type="text" class="form-control<?php echo(!empty($errors['lastName']) ? ' is-invalid' : ''); ?>" name="lastName" placeholder="Příjmení" required="required" value="<?php echo htmlspecialchars(@$lastName);?>">
                 <?php
                     echo (!empty($errors['firstName'])?'<div class="invalid-feedback">'.$errors['firstName'].'</div>':'');
                     echo (!empty($errors['lastName'])?'<div class="invalid-feedback">'.$errors['lastName'].'</div>':'');
@@ -122,7 +122,7 @@
         <div class="form-group">
             <div class="input-group">
                 <span id="envelope" class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input id="email" type="email" class="form-control" name="email" placeholder="Email" required="required" value="<?php echo htmlspecialchars(@$email);?>">
+                <input id="email" type="email" class="form-control<?php echo(!empty($errors['email']) ? ' is-invalid' : ''); ?>" name="email" placeholder="Email" required="required" value="<?php echo htmlspecialchars(@$email);?>"/>
                 <?php
                     echo (!empty($errors['email'])?'<div class="invalid-feedback">'.$errors['email'].'</div>':'');
                 ?>				
@@ -131,7 +131,7 @@
 		<div class="form-group">
             <div class="input-group">
                 <span id="password" class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" placeholder="Heslo" required="required">
+                <input type="password" class="form-control<?php echo(!empty($errors['password']) ? ' is-invalid' : ''); ?>" name="password" placeholder="Heslo" required="required">
                 <?php
                     echo (!empty($errors['password'])?'<div class="invalid-feedback">'.$errors['password'].'</div>':'');
                 ?>				
@@ -140,7 +140,7 @@
 		<div class="form-group">
             <div class="input-group">
                 <span id="password2" class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password2" placeholder="Potvrzení hesla" required="required">				
+                <input type="password" class="form-control<?php echo(!empty($errors['password2']) ? ' is-invalid' : ''); ?>" name="password2" placeholder="Potvrzení hesla" required="required"/>				
                 <?php
                     echo (!empty($errors['password2'])?'<div class="invalid-feedback">'.$errors['password2'].'</div>':'');
                 ?>
