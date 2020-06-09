@@ -3,7 +3,7 @@
     require_once 'include/user.php';
 
     $query = $db->prepare( 
-        'SELECT library_books.*, library_books.name AS bookName, library_books.author AS bookAuthor, library_books.max_stock AS bookMax, library_books.borrowed AS bookLoaned, library_books.description AS bookDescr  
+        'SELECT library_books.*, library_books.book_id AS bookID, library_books.name AS bookName, library_books.author AS bookAuthor, library_books.max_stock AS bookMax, library_books.borrowed AS bookLoaned, library_books.description AS bookDescr  
         FROM library_books');
     
     $query->execute();
@@ -24,7 +24,7 @@
             echo '<article class="col border border-dark my-1 py-1 w-100 bg-secondary text-white">';
             echo '  <div class="row">';
             echo '      <div class="col">';
-            echo '          <div><span class="badge badge-light">'.htmlspecialchars($book['bookName']).'</span></div>';
+            echo '          <h4><a href="./book_detail.php?bookID='.$book['bookID'].'" class="badge badge-light no_underline">'.htmlspecialchars($book['bookName']).'</a></h4>';
             echo '          <div>'.nl2br(htmlspecialchars($book['bookAuthor'])).'</div>';
             echo '      </div>';
 
