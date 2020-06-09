@@ -66,7 +66,7 @@
                   </a>
                   <?php
                     if(!empty($_SESSION['user_id'])){
-                      echo '<a id="nav-plan" class="btn btn-light px-4" href="#study-plan-page">
+                      echo '<a id="nav-plan" class="btn btn-light px-4" href="./loaned_books.php">
                       <span class="fa fa-feather"></span>
                       Vypůjčené knihy
                     </a>

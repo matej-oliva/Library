@@ -23,7 +23,7 @@
 
         <div class="col w-100 px-0">
         
-        <?
+        <?php
         foreach($book_list as $book){
             $availableBooks = $book['bookMax'] - $book['bookLoaned'];
             echo '<article class="col border border-dark my-1 py-1 w-100 bg-secondary text-white">';
@@ -42,8 +42,8 @@
             echo '  </div>';
             echo '  </article>';
         }
-        echo '</div>';
         ?>
+        </div>
 
 <?php
     include 'include/footer.php';
