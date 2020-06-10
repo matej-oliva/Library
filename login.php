@@ -61,7 +61,7 @@
             <button type="submit" class="btn btn-primary login-btn btn-block">Přihlásit se</button>
         </div>
         <div class="clearfix">
-            <a href="#" class="pull-right">Zapomenuté heslo?</a>
+            <a href="forgotten-password.php" class="pull-right">Zapomenuté heslo?</a>
         </div>
     	<div class="or-seperator"><i>nebo se přihlaste přes</i></div>
         <div class="text-center social-btn">
