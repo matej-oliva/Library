@@ -3,7 +3,8 @@
     "description":"Aplikace pro evidenci vypůjčených knih",
     "require": {
         "php": ">= 7.2",
-        "facebook/graph-sdk": "^5.7"
+        "facebook/graph-sdk": "^5.7",
+        "phpmailer/phpmailer": "^6.1"
     },
     "minimum-stability": "stable",
     "config": {

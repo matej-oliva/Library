@@ -11,6 +11,10 @@ class ComposerStaticInitb7f6c08063131a3bd19e5b3003ec50a3
     );
 
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'F' => 
         array (
             'Facebook\\' => 9,
@@ -18,6 +22,10 @@ class ComposerStaticInitb7f6c08063131a3bd19e5b3003ec50a3
     );
 
     public static $prefixDirsPsr4 = array (
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'Facebook\\' => 
         array (
             0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',

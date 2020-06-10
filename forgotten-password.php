@@ -3,6 +3,10 @@
 require_once 'include/user.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require './facebook/vendor/autoload.php';
 
 if (!empty($_SESSION['user_id'])) {
     //uživatel už je přihlášený, nemá smysl, aby se přihlašoval znovu
@@ -40,7 +44,7 @@ if (!empty($_POST) && !empty($_POST['email'])) {
 
         //sestavíme odkaz pro mail
         $link = 'https://eso.vse.cz/~olim02/Knihovna/renew-password.php'; 
-        $link .= '?user=' . $request['user_id'] . '&code=' . $request['code'] . '&request=' . $request['forgotten_password_id'];
+        $link = $link.'?user=' . $request['user_id'] . '&code=' . $request['code'] . '&request=' . $request['forgotten_password_id'];
         #endregion vygenerování kódu pro obnovu hesla
 
         #region poslání mailu pro obnovu hesla
