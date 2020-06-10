@@ -1,6 +1,7 @@
 <?php
 
     require_once 'include/user.php';
+    require 'user_required.php';
 
     $userID = $_SESSION['user_id'];
 
