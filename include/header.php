@@ -60,10 +60,6 @@
             ?>
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around">
-                  <a id="nav-book-edit" class="btn btn-light px-4" href="books_edit.php">
-                    <span class="fa fa-book"></span>
-                    Správa knih
-                  </a>
                   <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
                     <span class="fa fa-book-reader"></span>
                     Knihy
@@ -74,10 +70,9 @@
                       <span class="fa fa-feather"></span>
                       Vypůjčené knihy
                     </a>
-                  
-                    <a id="nav-courses" class="btn btn-light px-4" href="#courses-page">
-                      <span class="fa fa-user"></span>
-                      Profil
+                    <a id="nav-book-edit" class="btn btn-light px-4" href="books_edit.php">
+                      <span class="fa fa-book"></span>
+                      Správa knih
                     </a>';
                     };
                   ?> 
