@@ -92,12 +92,12 @@ if (@$_GET['mailed'] == 'ok') {
         <div class="bbot">
             <form method="post">
                 <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" required value="<?php echo htmlspecialchars(@$_POST['email']) ?>" />
+                <input type="email" class="py-1" name="email" id="email" required value="<?php echo htmlspecialchars(@$_POST['email']) ?>" />
                 <?php
                 echo ($errors ? '<div class="error">Neplatný e-mail.</div>' : '');
                 ?>
-                <button type="submit">Zaslat e-mail k obnově hesla</button><br>
-                <a href="login.php" class="btn btn-dark text-white">Zrušit</a><br>
+                <button type="submit" class="btn btn-dark">Zaslat e-mail k obnově hesla</button>
+                <a href="login.php" class="btn btn-secondary">Zrušit</a><br>
             </form>
 
         </div>
