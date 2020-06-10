@@ -41,7 +41,7 @@
                 echo    '   ID výpůjčky: '.htmlspecialchars($book['loanID']).'';
                 echo    '   </div>';
                 echo    '   <div class="small mt-1">';
-                echo    '   <div class="mt-2"><a href="reservation_form.php" class="btn btn-light px-4">Prodloužit</a></div>';
+
                 echo    '   </div>';
                 echo    '  </div>';
                 echo    '</div>';
