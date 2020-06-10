@@ -60,9 +60,13 @@
             ?>
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around">
-                  <a id="nav-summary" class="btn btn-light px-4" href="books_edit.php">
+                  <a id="nav-book-edit" class="btn btn-light px-4" href="books_edit.php">
                     <span class="fa fa-book"></span>
                     Správa knih
+                  </a>
+                  <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
+                    <span class="fa fa-book-reader"></span>
+                    Knihy
                   </a>
                   <?php
                     if(!empty($_SESSION['user_id'])){
