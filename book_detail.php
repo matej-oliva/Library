@@ -5,8 +5,9 @@
     $bookID = $_GET['bookID'];
 
     $query = $db->prepare( 
-        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, books.author_id AS bookAuthor, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr  
-        FROM books
+        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, books.max_stock AS bookMax, 
+        books.borrowed AS bookLoaned, books.description AS bookDescr, library_genres.name AS genre, books.year AS bookYear  
+        FROM books  JOIN library_authors USING (author_id) JOIN library_genres USING (genre_id)
         WHERE book_id = '.$bookID.'');
     
     $query->execute();
@@ -27,9 +28,13 @@
             echo '<article class="col border border-dark my-1 py-1 mx-auto w-75 bg-secondary text-white">';
             echo '  <div class="container-fluid">';
             echo '      <div class="col">';
-            echo '          <h4><div class="badge badge-light no_underline">'.htmlspecialchars($book['bookName']).'</div></h4>';
-            echo '          <div>'.nl2br(htmlspecialchars($book['bookAuthor'])).'</div>';
-            echo '          <div>'.htmlspecialchars($book['bookDescr']).'</div>';
+            echo '          <div class="row">';
+            echo '              <h4><div class="badge badge-light">'.htmlspecialchars($book['bookName']).'</div></h4>';
+            echo '              <h4><div class="badge badge-info ml-3">'.htmlspecialchars($book['genre']).'</div></h4>';
+            echo '          </div>';
+            echo '          <div class="font-weight-bold">Autor: '.nl2br(htmlspecialchars($book['bookAuthor'])).'</div>';
+            echo '          <div class="font-weight-bold mb-3">Rok prvního vydání: '.nl2br(htmlspecialchars($book['bookYear'])).'</div>';
+            echo '          <div class="mb-3">'.htmlspecialchars($book['bookDescr']).'</div>';
             echo '      </div>';
 
             echo '      <div class="col text-right">';

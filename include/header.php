@@ -69,10 +69,6 @@
                       echo '<a id="nav-plan" class="btn btn-light px-4" href="./loaned_books.php">
                       <span class="fa fa-feather"></span>
                       Vypůjčené knihy
-                    </a>
-                    <a id="nav-book-edit" class="btn btn-light px-4" href="books_edit.php">
-                      <span class="fa fa-book"></span>
-                      Správa knih
                     </a>';
                     };
                   ?> 
