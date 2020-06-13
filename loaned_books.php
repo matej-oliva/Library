@@ -6,9 +6,9 @@
     $userID = $_SESSION['user_id'];
 
     $query = $db->prepare( 
-        'SELECT library_loaned_books.*, library_books.name AS book_name, library_books.author AS bookAuthor, library_loaned_books.loan_id AS loanID, 
+        'SELECT library_loaned_books.*, books.name AS book_name, books.author_id AS bookAuthor, library_loaned_books.loan_id AS loanID, 
         library_loaned_books.loan_start_date AS startDate, library_loaned_books.loan_expire_date AS expDate, library_loaned_books.loan_overdue AS laon_overdue
-        FROM library_loaned_books JOIN library_books USING (book_id)
+        FROM library_loaned_books JOIN books USING (book_id)
         WHERE user_id = '.$userID.'
         ORDER BY loan_id ASC 
     ');

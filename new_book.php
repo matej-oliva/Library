@@ -29,7 +29,7 @@
         #region nova kniha
         if(empty($errors)){
             
-            $query=$db->prepare('INSERT INTO library_books (name, author, max_stock, description) VALUES (:name, :author, :max_stock, :description);');
+            $query=$db->prepare('INSERT INTO books (name, author, max_stock, description) VALUES (:name, :author, :max_stock, :description);');
             $query->execute([
                 ':name'=>$name,
                 ':author'=>$author,

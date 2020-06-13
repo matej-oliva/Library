@@ -8,8 +8,8 @@
     }
 
     $query = $db->prepare( 
-        'SELECT library_books.*, library_books.book_id AS bookID, library_books.name AS bookName, library_books.author AS bookAuthor, library_books.max_stock AS bookMax, library_books.borrowed AS bookLoaned, library_books.description AS bookDescr  
-        FROM library_books');
+        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr  
+        FROM books JOIN library_authors USING (author_id)');
     
     $query->execute();
     

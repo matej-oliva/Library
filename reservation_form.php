@@ -8,7 +8,7 @@
         #region kontrola vyberu knihy
         if(!empty($_POST['book'])){
             
-            $booksQuery=$db->prepare('SELECT * FROM library_books WHERE book_id=:book LIMIT 1;');
+            $booksQuery=$db->prepare('SELECT * FROM books WHERE book_id=:book LIMIT 1;');
             $booksQuery->execute([
                 ':book'=>$_POST['book']
             ]);
@@ -28,7 +28,7 @@
         #endregion
 
         /* if(empty($errors)){
-            $saveQuery = $db->prepare('INSERT INTO library_books (book_id, name, author, max_stock, borrowed) VALUES (, :book, )');
+            $saveQuery = $db->prepare('INSERT INTO books (book_id, name, author, max_stock, borrowed) VALUES (, :book, )');
             //TODO!!!!
         }; */
     };
@@ -40,12 +40,12 @@
 ?>
     <form method="post">
         <div>
-            <label for="library_books">Knihy:</label>
-            <select name="library_books" id="library_books" required>
+            <label for="books">Knihy:</label>
+            <select name="books" id="books" required>
                 <option value="">--vyberte--</option>
                 <?php
                     $booksQuery = $db->prepare(
-                        'SELECT * FROM library_books ORDER BY name;');
+                        'SELECT * FROM books ORDER BY name;');
                     $booksQuery->execute();
                     $books=$booksQuery->fetchAll(PDO::FETCH_ASSOC);
                     if(!empty($books)){
