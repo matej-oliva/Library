@@ -11,7 +11,7 @@
     
     $author_list = $author_query->fetchAll(PDO::FETCH_ASSOC);
     if(empty($author_list)){
-        echo '<div class="alert alert-info">Nebyly nalezeny žádní autoři.</div>';
+        echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
     };
 
     $genre_query = $db->prepare( 

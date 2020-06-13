@@ -5,8 +5,9 @@
     
 
     $query = $db->prepare( 
-        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr  
-        FROM books JOIN library_authors USING (author_id)
+        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, 
+        books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr, library_genres.name AS genre  
+        FROM books JOIN library_authors USING (author_id) JOIN library_genres USING (genre_id)
         ORDER BY library_authors.name ASC');
 
     $query->execute();
@@ -33,8 +34,12 @@
             $availableBooks = $book['bookMax'] - $book['bookLoaned'];
             echo '<article class="col border border-dark my-1 py-1 w-100 bg-secondary text-white">';
             echo '  <div class="row">';
-            echo '      <div class="col">';
-            echo '          <h4><a href="./book_detail.php?bookID='.$book['bookID'].'" class="badge badge-light no_underline">'.htmlspecialchars($book['bookName']).'</a></h4>';
+            echo '      <div class="col ml-4">';
+            echo '          <div class="row">';
+            echo '              <h4><a href="./book_detail.php?bookID='.$book['bookID'].'" class="badge badge-light">'.htmlspecialchars($book['bookName']).'</a></h4>';
+            echo '              <h6><div class="badge badge-warning ml-3">'.htmlspecialchars($book['genre']).'</div></h6>';
+            echo '          </div>';
+            
             echo '          <div>'.nl2br(htmlspecialchars($book['bookAuthor'])).'</div>';
             echo '      </div>';
 
@@ -42,7 +47,7 @@
             echo '          <div class="small text-white mt-1">'.'Aktuálně&nbsp;dostupné:&nbsp;'.$availableBooks.'</div>';
             echo '          <div class="row text-right">';
             echo '              <div class="col text-right">';
-            echo '                  <a href="./book_detail.php?bookID='.$book['bookID'].'" class="btn btn-info btn-sm">Rezervovat</a>';
+            echo '                  <a href="./reservation.php?bookID='.$book['bookID'].'" class="btn btn-info btn-sm">Vypůjčit</a>';
             echo '                  <a href="./books_edit.php?bookID='.$book['bookID'].'" class="btn btn-light btn-sm">Upravit</a>';
             echo '                  <a href="./book_delete.php?bookID='.$book['bookID'].'" class="btn btn-danger btn-sm">Smazat</a>';
             echo '              </div>';
