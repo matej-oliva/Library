@@ -14,7 +14,7 @@
     <footer class="bg-dark text-white text-center py-2 container">
     &copy;&nbsp;Matěj&nbsp;Oliva&nbsp;2020
     <br>Vysoká škola ekonomická v Praze 
-    <br>Fakulta informatiky a statistiky
+    <br>Fakulta informatiky a statistiky, 4IZ278
     </footer>
   </body>
 </html>

@@ -45,7 +45,7 @@
         
         <div class="new_book-form pt-5">
             <form method="POST">
-                <h2 class="text-center mb-4 pl-5">Opravdu chcete knihu smazat?</h2>
+                <h2 class="text-center mb-4 pl-4">Opravdu chcete tuto knihu smazat z databáze?</h2>
                 <div class="form-group">
                     <input id="delete_name" type="text" disabled class="form-control text-center font-weight-bold<?php echo(!empty($errors['delete_name']) ? ' is-invalid' : ''); ?>" 
                         name="delete_name" value="<?php echo ''.htmlspecialchars($book['bookName']).'';?>"/>
@@ -55,8 +55,8 @@
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <button type="submit" class="btn btn-danger col form-control mr-2">Smazat</button>
-                        <a href="book_list.php" class="col btn btn-outline-secondary ml-2">Zrušit</a>
+                        <a href="book_list.php" class="col btn btn-outline-secondary mr-2">Zrušit</a>
+                        <button type="submit" class="btn btn-danger col form-control ml-2">Smazat</button>
                     </div>
                 </div>
             </form>

@@ -10,10 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title><?php echo (!empty($pageTitle)?$pageTitle.' - ':'')?>Knihovna</title>
         <script src="https://kit.fontawesome.com/d4998154c5.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css?family=Mirza:400,500,600,700&display=swap&subset=latin-ext"
-            rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Oregano:400,400i&display=swap&subset=latin-ext"
-            rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">

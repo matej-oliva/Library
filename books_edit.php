@@ -5,25 +5,52 @@
 
     $bookID = $_GET['bookID'];
 
-    $query = $db->prepare( 
-        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name
-         AS bookAuthor, books.year AS bookYear, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr  
-        FROM books JOIN library_authors USING (author_id)
+    $infoQuery = $db->prepare( 
+        'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, library_genres.name AS bookGenre, library_genres.genre_id AS genreID,
+        books.year AS bookYear, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr, library_authors.author_id AS authorID  
+        FROM books JOIN library_authors USING (author_id) JOIN library_genres USING (genre_id)
         WHERE book_id = '.$bookID.'
         ORDER BY books.name ASC');
     
-    $query->execute();
+    $infoQuery->execute();
     
-    $book = $query->fetch();
+    $book = $infoQuery->fetch();
     if(empty($book)){
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     }else{
         $bookID = $book['bookID'];
         $bookName = $book['bookName'];
+        $bookGenre = $book['bookGenre'];
+        $genreID = $book['genreID'];
+        $authorID = $book['authorID'];
         $bookAuthor = $book['bookAuthor'];
         $bookYear = $book['bookYear'];
         $bookMax = $book['bookMax'];
         $bookDescr = $book['bookDescr'];
+    };
+
+    $genre_query = $db->prepare( 
+        'SELECT DISTINCT library_genres.name AS bookGenre, library_genres.genre_id AS genreID  
+        FROM library_genres
+        ORDER BY name ASC');
+
+    $genre_query->execute();
+    
+    $genre_list = $genre_query->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($genre_list)){
+        echo '<div class="alert alert-info">Nebyly nalezeny žádné žánry.</div>';
+    };
+
+    $author_query = $db->prepare( 
+        'SELECT DISTINCT library_authors.name AS bookAuthor, library_authors.author_id AS authorID  
+        FROM library_authors
+        ORDER BY name ASC');
+
+    $author_query->execute();
+    
+    $author_list = $author_query->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($author_list)){
+        echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
     };
 
     $errors=[];
@@ -35,9 +62,14 @@
             $errors['edit_name']='Pole je povinné';
         }
 
-        $edit_author=trim(@$_POST['edit_author']);
-        if(empty($edit_author)){
-            $errors['edit_author']='Pole je povinné';
+        $author_picker=trim(@$_POST['author_picker']);
+        if(empty($author_picker)){
+            $errors['author_picker']='Pole je povinné';
+        }
+
+        $genre_picker=trim(@$_POST['genre_picker']);
+        if(empty($genre_picker)){
+            $errors['genre_picker']='Pole je povinné';
         }
 
         $edit_year=trim(@$_POST['edit_year']);
@@ -62,16 +94,17 @@
         #region uprava knihy
         if(empty($errors)){
             
-            $query=$db->prepare('UPDATE books SET book_id=?, name=?, author=?, max_stock=?, description=? WHERE book_id=?');
-            $query->execute(array(
+            $updateQuery=$db->prepare('UPDATE books SET name=?, author_id=?, genre_id=?, max_stock=?, description=? WHERE book_id=?');
+            $updateQuery->execute(array(
                 $edit_name,
-                $edit_author,
+                $author_picker,
+                $genre_picker,
                 $edit_max_stock,
                 $edit_description,
-                $edit_bookID
+                $bookID
             ));
 
-            header('Location: index.php');
+            header('Location: book_list.php');
             exit();
         }
         #endregion uprava knihy
@@ -79,11 +112,11 @@
         #endregion zpracovani formulare
     };
 
-    $pageTitle="Správa knih";
+    $pageTitle="Úprava knihy";
     include 'include/header.php';
 ?>      
         <div class="row">
-            <h2 class="col">Správa knih</h2>
+            <h2 class="col">Úprava knihy</h2>
         </div>
         
         <div class="new_book-form pt-5">
@@ -104,10 +137,49 @@
                 <div class="form-group">
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-user"></i></span>
-                        <input id="edit_author" type="text" class="form-control col w-75<?php echo(!empty($errors['edit_author']) ? ' is-invalid' : ''); ?>" 
-                        name="edit_author" placeholder="Autor knihy" value="<?php if(empty($_POST)){echo ''.htmlspecialchars($book['bookAuthor']).'';}else{echo htmlspecialchars(@$edit_author);}?>"/>
+                        <select name="author_picker" id="author_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true"
+                         required>
+                                    <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($authorID).'';}else{echo htmlspecialchars(@$author_picker);}?>">
+                                    <?php echo ''.htmlspecialchars($bookAuthor).'';?>
+                                    </option>
+                                    <?php
+                                        if(!empty($author_list)){
+                                            foreach($author_list as $author){
+                                                echo '<option value="' . $author['authorID'] . '"';
+                                                if ($author['authorID'] == @$_POST['authorID']) {
+                                                    echo ' selected="selected" ';
+                                                }
+                                                echo '>' . htmlspecialchars($author['bookAuthor']).'</option>';
+                                            }
+                                        }
+                                    ?>
+                                </select>
                         <?php
-                            echo (!empty($errors['edit_author'])?'<div class="invalid-feedback">'.$errors['edit_author'].'</div>':'');
+                            echo (!empty($errors['author'])?'<div class="invalid-feedback">'.$errors['author'].'</div>':'');
+                        ?>			
+                    </div>
+                </div>
+                <div class="form-group">
+                	<div class="input-group">
+                        <span class="input-group-addon col"><i class="fa fa-dragon"></i></span>
+                        <select name="genre_picker" id="genre_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true" required>
+                                    <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($genreID).'';}else{echo htmlspecialchars(@$genre_picker);}?>">
+                                    <?php echo ''.htmlspecialchars($bookGenre).'';?>
+                                    </option>
+                                    <?php
+                                        if(!empty($genre_list)){
+                                            foreach($genre_list as $genre){
+                                                echo '<option value="' . $genre['genreID'] . '"';
+                                                if ($genre['genreID'] == @$_POST['genreID']) {
+                                                    echo ' selected="selected" ';
+                                                }
+                                                echo '>' . htmlspecialchars($genre['bookGenre']).'</option>';
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                        <?php
+                            echo (!empty($errors['genre'])?'<div class="invalid-feedback">'.$errors['genre'].'</div>':'');
                         ?>			
                     </div>
                 </div>
@@ -143,8 +215,8 @@
                 </div>        
                 <div class="form-group">
                     <div class="input-group">
-                        <span class="input-group-addon col w-50"></span>
-                        <button type="submit" class="btn btn-dark col w-75 form-control">Upravit</button>
+                        <a href="book_list.php" class="col btn btn-outline-secondary mr-2 w-25">Zrušit</a>
+                        <button type="submit" class="btn btn-dark col form-control ml-2">Upravit</button>
                     </div>
                 </div>
                 </div>
