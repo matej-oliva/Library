@@ -7,7 +7,7 @@
     $query = $db->prepare( 
         'SELECT books.*, books.book_id AS bookID, books.name AS bookName, library_authors.name AS bookAuthor, books.max_stock AS bookMax, books.borrowed AS bookLoaned, books.description AS bookDescr  
         FROM books JOIN library_authors USING (author_id)
-        ORDER BY books.author_id ASC');
+        ORDER BY library_authors.name ASC');
 
     $query->execute();
 
@@ -44,7 +44,7 @@
             echo '              <div class="col text-right">';
             echo '                  <a href="./book_detail.php?bookID='.$book['bookID'].'" class="btn btn-info btn-sm">Rezervovat</a>';
             echo '                  <a href="./books_edit.php?bookID='.$book['bookID'].'" class="btn btn-light btn-sm">Upravit</a>';
-            echo '                  <a href="./book_detail.php?bookID='.$book['bookID'].'" class="btn btn-danger btn-sm">Smazat</a>';
+            echo '                  <a href="./book_delete.php?bookID='.$book['bookID'].'" class="btn btn-danger btn-sm">Smazat</a>';
             echo '              </div>';
             echo '          </div>';
             echo '      </div>';
