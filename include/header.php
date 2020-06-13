@@ -12,6 +12,7 @@
         <script src="https://kit.fontawesome.com/d4998154c5.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
@@ -39,7 +40,7 @@
         </script>
         <header class="container bg-dark">
           <div class="row">
-            <h1 class="col text-white py-4 px-2"><a class="text-white no_underline" href="./index.php">Knihovna</a></h1>
+            <h1 class="col text-white py-4 px-2 ml-4"><a class="text-white no_underline" href="./index.php">Knihovna</a></h1>
             <?php
             echo '<div class="col py-4 px-2 text-right">';
             if(!empty($_SESSION['user_id'])){
@@ -65,7 +66,12 @@
                       echo '<a id="nav-plan" class="btn btn-light px-4" href="./loaned_books.php">
                       <span class="fa fa-feather"></span>
                       Vypůjčené knihy
-                    </a>';
+                    </a>
+                    <a id="nav-plan" class="btn btn-light px-4" href="./loaned_books.php">
+                      <span class="fa fa-kiwi-bird"></span>
+                      Profil
+                    </a>
+                    ';
                     };
                   ?> 
           </nav>

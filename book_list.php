@@ -21,18 +21,24 @@
     include 'include/header.php';
 ?>      
         <div class="row">
-            <h2 class="col">Seznam knih</h2>
+            <h2 class="col-4 mt-2 mx-3">Seznam knih</h2>
+            <div class="input-group flex-nowrap col-3 py-2 px-2 mr-auto mt-1 text-center">
+                <div class="input-group-prepend">
+                    <span class="input-group-text fa fa-search"></span>
+                </div>
+                <input class="form-control" id="searchBar" type="text" placeholder="Vyhledat knihu, autora, žánr">
+            </div>
             <form action="users.php" method="GET" class="col text-right py-2 mr-3">
-            <a href="new_book.php" class="btn btn-success px-4">Přidat knihu</a>
+            <a href="new_book.php" class="btn btn-success px-4 mt-1">Přidat knihu</a>
             </form>
         </div>
         
         <div class="col w-100 px-0">
-        
+        <ul class="list-group mx-3" id="bookList">
         <?
         foreach($book_list as $book){
             $availableBooks = $book['bookMax'] - $book['bookLoaned'];
-            echo '<article class="col border border-dark my-1 py-1 w-100 bg-secondary text-white">';
+            echo '<li class="list-group-item col border border-dark my-1 py-1 w-100 bg-secondary text-white">';
             echo '  <div class="row">';
             echo '      <div class="col ml-4">';
             echo '          <div class="row">';
@@ -59,7 +65,18 @@
         }
         echo '</div>';
         ?>
+        </ul>
 
+        <script>
+            $(document).ready(function(){
+                $("#searchBar").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#bookList li").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
 <?php
     include 'include/footer.php';
 ?>
