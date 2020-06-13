@@ -34,7 +34,7 @@
         </div>
         
         <div class="col w-100 px-0">
-        <ul class="list-group mx-3" id="bookList">
+        <ul class="list-group mx-3" id="searchList">
         <?
         foreach($book_list as $book){
             $availableBooks = $book['bookMax'] - $book['bookLoaned'];
@@ -66,17 +66,7 @@
         echo '</div>';
         ?>
         </ul>
-
-        <script>
-            $(document).ready(function(){
-                $("#searchBar").on("keyup", function() {
-                    var value = $(this).val().toLowerCase();
-                    $("#bookList li").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-        </script>
+        
 <?php
     include 'include/footer.php';
 ?>
