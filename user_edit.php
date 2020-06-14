@@ -101,7 +101,7 @@
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    <a href="book_list.php" class="col btn btn-outline-secondary mr-2">Zrušit</a>
+                    <a href="user_mgmt.php" class="col btn btn-outline-secondary mr-2">Zrušit</a>
                     <button type="submit" class="btn btn-dark col form-control ml-2">Upravit</button>
                 </div>
             </div>

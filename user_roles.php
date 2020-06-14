@@ -43,36 +43,18 @@
     if(!empty($_POST)){
         #region zpracovani formulare
 
-            $name=trim(@$_POST['name']);
-            if(empty($name)){
-                $errors['name']='Pole je povinné';
-            }
-
-            $email=trim(@$_POST['email']);
-            if(empty($email)){
-                $errors['email']='Pole je povinné';
-            }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $errors['email']='Musíte zadat platný e-mail';
-            }
-
-            if($email !== $userInfo['userEmail']){
-                foreach($user_list as $user){
-                    $userCheck = preg_replace('/\s+/', '', $user['email']);
-                    $emailCheck = preg_replace('/\s+/', '', $email);
-                    if($userCheck === $emailCheck){
-                        $errors['email']='Email již existuje!';
-                    }
-                }
-            }
+        $role_id=trim(@$_POST['role_picker']);
+        if(!is_numeric($role_id)){
+            $errors['role']='Pole je povinné';
+        }
 
         if(empty($errors)){
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 #region uprava autora
             
-                    $delQuery=$db->prepare('UPDATE library_users SET name=?, email=?  WHERE user_id=?;');
+                    $delQuery=$db->prepare('UPDATE library_users SET role_id =? WHERE user_id=?;');
                     $delQuery->execute(array(
-                        $name,
-                        $email,
+                        $role_id,
                         $userID
                     ));
                     header('Location: user_mgmt.php');
@@ -90,9 +72,9 @@
     <h2 class="col mx-3 my-3">Změna role uživatele</h2>
 </div>
 
-    <div class="new_book-form pt-5 w-50">
+    <div class="new_book-form pt-5 w-25">
         <form method="POST">
-            <h2 class="text-center mb-4 pl-4">Změna role uživatele</h2>
+            <h2 class="text-center mb-4 pl-5">Změna role uživatele</h2>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon col"><i class="fa fa-user"></i></span>
@@ -106,7 +88,7 @@
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-user-tie"></i></span>
                         <select name="role_picker" id="role_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" required>
-                                    <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($roleID).'';}else{echo htmlspecialchars(@$role_picker);}?>">
+                                    <option value="<?php if(!empty($_POST)){echo htmlspecialchars(@$role_picker);}?>">
                                     ---Vyberte roli---
                                     </option>
                                     <?php
@@ -128,7 +110,7 @@
                 </div>
             <div class="form-group">
                 <div class="input-group">
-                    <a href="users_mgmt.php" class="col btn btn-outline-secondary mr-2">Zrušit</a>
+                    <a href="user_mgmt.php" class="col btn btn-outline-secondary mr-2">Zrušit</a>
                     <button type="submit" class="btn btn-info col form-control ml-2">Změnit</button>
                 </div>
             </div>

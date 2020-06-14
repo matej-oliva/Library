@@ -137,7 +137,7 @@
                 <div class="form-group">
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-user"></i></span>
-                        <select name="author_picker" id="author_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true"
+                        <select name="author_picker" id="author_picker" class="form-control custom-picker selectpicker col w-75 <?php echo(!empty($errors['author_picker']) ? ' is-invalid' : ''); ?>" data-size="5" data-dropup-auto="false" data-live-search="true"
                          required>
                                     <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($authorID).'';}else{echo htmlspecialchars(@$author_picker);}?>">
                                     <?php echo ''.htmlspecialchars($bookAuthor).'';?>
@@ -162,7 +162,7 @@
                 <div class="form-group">
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-dragon"></i></span>
-                        <select name="genre_picker" id="genre_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true" required>
+                        <select name="genre_picker" id="genre_picker" class="form-control custom-picker selectpicker col w-75 <?php echo(!empty($errors['genre_picker']) ? ' is-invalid' : ''); ?>" data-size="5" data-dropup-auto="false" data-live-search="true" required>
                                     <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($genreID).'';}else{echo htmlspecialchars(@$genre_picker);}?>">
                                     <?php echo ''.htmlspecialchars($bookGenre).'';?>
                                     </option>
