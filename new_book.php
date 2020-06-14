@@ -2,6 +2,14 @@
     require_once 'include/user.php';
     require_once 'librarian_required.php';
 
+    $book_query = $db->prepare( 
+        'SELECT DISTINCT books.name AS bookName
+        FROM books');
+
+    $book_query->execute();
+    
+    $book_list = $book_query->fetchAll(PDO::FETCH_ASSOC);
+
     $author_query = $db->prepare( 
         'SELECT DISTINCT library_authors.name AS bookAuthor, library_authors.author_id AS authorID  
         FROM library_authors
@@ -33,6 +41,14 @@
         $name=trim(@$_POST['name']);
         if(empty($name)){
             $errors['name']='Pole je povinné';
+        }
+
+        foreach($book_list as $book){
+            $bookCheck = preg_replace('/\s+/', '', $book['bookName']);
+            $nameCheck = preg_replace('/\s+/', '', $name);
+            if($nameCheck === $bookCheck){
+                $errors['name']='Kniha již existuje!';
+            }
         }
 
         $author=trim(@$_POST['author_picker']);
