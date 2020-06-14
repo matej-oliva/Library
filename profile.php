@@ -41,6 +41,7 @@
                 $errors['email']='Musíte zadat platný e-mail';
             }
 
+            if($email !== $userInfo['userEmail']){
             foreach($user_list as $user){
                 $userCheck = preg_replace('/\s+/', '', $user['email']);
                 $emailCheck = preg_replace('/\s+/', '', $email);
@@ -48,6 +49,7 @@
                     $errors['email']='Email již existuje!';
                 }
             }
+        }
 
         if(empty($errors)){
             if ($_SERVER["REQUEST_METHOD"] == "POST") {

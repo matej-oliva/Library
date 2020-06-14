@@ -33,7 +33,7 @@
             </form>
         </div>
         
-        <div class="col w-100 px-0">
+    <div class="col w-100 px-0 pb-5">
         <ul class="list-group mx-3" id="searchList">
         <?
         foreach($book_list as $book){
@@ -63,9 +63,9 @@
             echo '  </div>';
             echo '  </li>';
         }
-        echo '</div>';
         ?>
         </ul>
+    </div>
         
 <?php
     include 'include/footer.php';

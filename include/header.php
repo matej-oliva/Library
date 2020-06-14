@@ -81,7 +81,7 @@
                     </a>
                     <a id="nav-users" class="btn btn-light px-4" href="./user_mgmt.php">
                       <span class="fa fa-user-cog"></span>
-                      Správa rolí
+                      Správa uživatelů
                     </a>
                     ';
                     };
