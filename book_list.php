@@ -61,7 +61,7 @@
             echo '      </div>';
             
             echo '  </div>';
-            echo '  </article>';
+            echo '  </li>';
         }
         echo '</div>';
         ?>
