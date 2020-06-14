@@ -6,7 +6,7 @@
     $bookID = $_GET['bookID'];
 
     $queryInfo = $db->prepare( 
-        'SELECT books.book_id AS bookID, books.name AS bookName
+        'SELECT books.book_id AS bookID, books.name AS bookName, books.max_stock AS maxStock, books.borrowed AS borrowed
         FROM books
         WHERE book_id = '.$bookID.'
         ORDER BY books.name ASC');
@@ -19,10 +19,12 @@
     }else{
         $bookID = $book['bookID'];
         $bookName = $book['bookName'];
+        $bookStock = $book['maxStock'];
+        $bookBor = $book['borrowed'];
     };
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #region smazani knihy
-        if(empty($errors)){
+        if($bookStock > $bookBor){
             $loanQuery=$db->prepare('INSERT INTO library_loaned_books (user_id, book_id, loan_start_date, loan_expire_date) 
             VALUES (:user_id, :bookID, Now(), DATE_ADD(Now(), INTERVAL 1 MONTH));');
             $loanQuery->execute(array(
@@ -30,8 +32,15 @@
                 ':bookID'=>$bookID
             ));
 
+            $borQuery=$db->prepare('UPDATE books SET borrowed = borrowed + 1 WHERE book_id=?;');
+            $borQuery->execute(array(
+                $bookID
+            ));
+
             header('Location: book_list.php');
             exit();
+        }else{
+            echo '<div class="alert alert-danger">Aktuálně není žádná kniha k vypůjčení, počkejte až knihu někdo vrátí.</div>';
         }
         #endregion pujceni knihy
     };

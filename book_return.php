@@ -28,6 +28,11 @@
                 $loanID
             ));
 
+            $borQuery=$db->prepare('UPDATE books SET borrowed = borrowed - 1 WHERE book_id=?;');
+            $borQuery->execute(array(
+                $bookID
+            ));
+
             header('Location: loaned_books.php');
             exit();
         #endregion pujceni knihy
