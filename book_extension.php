@@ -1,7 +1,7 @@
 <?php
 
     require_once 'include/user.php';
-    require 'librarian_required.php';
+    require 'user_required.php';
 
     $bookID = $_GET['bookID'];
 

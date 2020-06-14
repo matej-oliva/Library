@@ -2,6 +2,7 @@
 <?php
 
 require_once 'include/user.php';
+require 'admin_required.php';
 
 
 $query = $db->prepare( 
