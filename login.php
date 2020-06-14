@@ -17,6 +17,11 @@
             if(password_verify($_POST['password'],$user['password'])){
                 $_SESSION['user_id']=$user['user_id'];
                 $_SESSION['user_name']=$user['name'];
+
+                //smažeme požadavky na obnovu hesla
+                $forgottenDeleteQuery = $db->prepare('DELETE FROM forgotten_passwords WHERE user_id=:user;');
+                $forgottenDeleteQuery->execute([':user' => $user['user_id']]);
+
                 header('Location: index.php');
                 exit();
             }else{

@@ -17,6 +17,14 @@
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
+    <?php
+          if (!empty($_SESSION['user_id'])) {
+            //zjištění role přihlášeného uživatele
+            if ($loggedUser) {
+              $role = (int)$loggedUser['role_id'];
+            }
+          }
+        ?>
         <script>
           window.fbAsyncInit = function() {
             FB.init({
@@ -62,7 +70,8 @@
                     Knihy
                   </a>
                   <?php
-                    if(!empty($_SESSION['user_id'])){
+                  if (!empty($_SESSION['user_id'])) {
+                    if($role > 2){
                       echo '<a id="nav-loans" class="btn btn-light px-4" href="./loaned_books.php">
                       <span class="fa fa-book-reader"></span>
                       Vypůjčené knihy
@@ -85,6 +94,7 @@
                     </a>
                     ';
                     };
+                  }
                   ?> 
           </nav>
         </header>
