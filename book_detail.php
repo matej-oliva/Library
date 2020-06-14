@@ -44,9 +44,6 @@
             }
             echo '      </div>';
             echo '  </div>';
-            echo '  <div class="row">';
-            
-            echo '  </div>';
             echo '</article>';
         }
             ?>

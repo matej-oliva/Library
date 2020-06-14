@@ -35,12 +35,13 @@
             if(empty($name)){
                 $errors['name']='Pole je povinné';
             }
-
-            foreach($author_list as $author){
-                $authorCheck = preg_replace('/\s+/', '', $author['bookAuthor']);
-                $nameCheck = preg_replace('/\s+/', '', $name);
-                if($nameCheck === $authorCheck){
-                    $errors['name']='Autor již existuje!';
+            if($name !== $author['authorName']){
+                foreach($author_list as $author){
+                    $authorCheck = preg_replace('/\s+/', '', $author['bookAuthor']);
+                    $nameCheck = preg_replace('/\s+/', '', $name);
+                    if($nameCheck === $authorCheck){
+                        $errors['name']='Autor již existuje!';
+                    }
                 }
             }
 

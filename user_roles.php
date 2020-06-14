@@ -64,7 +64,7 @@
         }
     }
 
-    $pageTitle="Úprava uživatele";
+    $pageTitle="Změna role";
     include 'include/header.php';
 ?>      
 
@@ -74,7 +74,7 @@
 
     <div class="new_book-form pt-5 w-25">
         <form method="POST">
-            <h2 class="text-center mb-4 pl-5">Změna role uživatele</h2>
+            <h2 class="text-center mb-4 pl-5">Vyberte novou roli uživatele</h2>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon col"><i class="fa fa-user"></i></span>

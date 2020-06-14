@@ -43,12 +43,12 @@
         #endregion pujceni knihy
     };
 
-    $pageTitle="Výpůjčka knihy";
+    $pageTitle="Prodloužení výpůjčky";
     include 'include/header.php';
 ?>      
 
 <div class="row">
-    <h2 class="col">Výpůjčka knihy</h2>
+    <h2 class="col">Prodloužení výpůjčky</h2>
 </div>
         
         <div class="new_book-form pt-5">

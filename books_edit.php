@@ -53,6 +53,18 @@
         echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
     };
 
+    $allBooks_query = $db->prepare( 
+        'SELECT DISTINCT books.name AS bookName
+        FROM books
+        ORDER BY name ASC');
+
+    $allBooks_query->execute();
+    
+    $book_list = $allBooks_query->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($book_list)){
+        echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
+    };
+
     $errors=[];
     if(!empty($_POST)){
         #region zpracovani formulare
@@ -60,6 +72,16 @@
         $edit_name=trim(@$_POST['edit_name']);
         if(empty($edit_name)){
             $errors['edit_name']='Pole je povinné';
+        }
+
+        if($edit_name !== $book['bookName']){
+            foreach($book_list as $book){
+                $bookCheck = preg_replace('/\s+/', '', $book['bookName']);
+                $nameCheck = preg_replace('/\s+/', '', $edit_name);
+                if($nameCheck === $bookCheck){
+                    $errors['edit_name']='Tato kniha již existuje!';
+                }
+            }
         }
 
         $author_picker=trim(@$_POST['author_picker']);
