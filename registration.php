@@ -64,27 +64,17 @@
             }
         #endregion kontrola hesla
 
-        #region nastaveni knihovnika
-        if(isset($_POST['librarian'])){
-            $librarian = 1;
-        }else{
-            $librarian = 0;
-        }
-
-        #endregion nastaveni knihovnika
-
 
         #region registrace uzivatele
         if(empty($errors)){
             $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
             $name = $firstName.' '.$lastName;
             
-            $query=$db->prepare('INSERT INTO library_users (name, email, password, librarian, active) VALUES (:name, :email, :password, :librarian, 1);');
+            $query=$db->prepare('INSERT INTO library_users (name, email, password, active) VALUES (:name, :email, :password, 1);');
             $query->execute([
                 ':name'=>$name,
                 ':email'=>$email,
-                ':password'=>$password,
-                ':librarian'=>$librarian
+                ':password'=>$password
             ]);
             
 
@@ -152,16 +142,7 @@
                     echo (!empty($errors['password2'])?'<div class="invalid-feedback">'.$errors['password2'].'</div>':'');
                 ?>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                    <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                    <input id="librarian" type="checkbox" name="librarian" value="<?php echo htmlspecialchars(@$librarian);?>">
-                    <span class="right">Jste knihovník?</span>
-                </label>
-            </div>
-        </div>         
+        </div>       
         <div class="form-group">
             <button type="submit" class="btn btn-primary login-btn btn-block">Registrovat se</button>
         </div>
