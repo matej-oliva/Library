@@ -53,6 +53,18 @@
         echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
     };
 
+    $allBooks_query = $db->prepare( 
+        'SELECT DISTINCT books.name AS bookName
+        FROM books
+        ORDER BY name ASC');
+
+    $allBooks_query->execute();
+    
+    $book_list = $allBooks_query->fetchAll(PDO::FETCH_ASSOC);
+    if(empty($book_list)){
+        echo '<div class="alert alert-info">Nebyly nalezeni žádní autoři.</div>';
+    };
+
     $errors=[];
     if(!empty($_POST)){
         #region zpracovani formulare
@@ -60,6 +72,16 @@
         $edit_name=trim(@$_POST['edit_name']);
         if(empty($edit_name)){
             $errors['edit_name']='Pole je povinné';
+        }
+
+        if($edit_name !== $book['bookName']){
+            foreach($book_list as $book){
+                $bookCheck = preg_replace('/\s+/', '', $book['bookName']);
+                $nameCheck = preg_replace('/\s+/', '', $edit_name);
+                if($nameCheck === $bookCheck){
+                    $errors['edit_name']='Tato kniha již existuje!';
+                }
+            }
         }
 
         $author_picker=trim(@$_POST['author_picker']);
@@ -115,7 +137,7 @@
     $pageTitle="Úprava knihy";
     include 'include/header.php';
 ?>      
-        <div class="row">
+        <div class="row mx-3">
             <h2 class="col">Úprava knihy</h2>
         </div>
         
@@ -137,7 +159,7 @@
                 <div class="form-group">
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-user"></i></span>
-                        <select name="author_picker" id="author_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true"
+                        <select name="author_picker" id="author_picker" class="form-control custom-picker selectpicker col w-75 <?php echo(!empty($errors['author_picker']) ? ' is-invalid' : ''); ?>" data-size="5" data-dropup-auto="false" data-live-search="true"
                          required>
                                     <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($authorID).'';}else{echo htmlspecialchars(@$author_picker);}?>">
                                     <?php echo ''.htmlspecialchars($bookAuthor).'';?>
@@ -162,7 +184,7 @@
                 <div class="form-group">
                 	<div class="input-group">
                         <span class="input-group-addon col"><i class="fa fa-dragon"></i></span>
-                        <select name="genre_picker" id="genre_picker" class="form-control custom-picker selectpicker col w-75" data-size="5" data-dropup-auto="false" data-live-search="true" required>
+                        <select name="genre_picker" id="genre_picker" class="form-control custom-picker selectpicker col w-75 <?php echo(!empty($errors['genre_picker']) ? ' is-invalid' : ''); ?>" data-size="5" data-dropup-auto="false" data-live-search="true" required>
                                     <option value="<?php if(empty($_POST)){echo ''.htmlspecialchars($genreID).'';}else{echo htmlspecialchars(@$genre_picker);}?>">
                                     <?php echo ''.htmlspecialchars($bookGenre).'';?>
                                     </option>

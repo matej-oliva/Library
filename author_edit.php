@@ -35,12 +35,13 @@
             if(empty($name)){
                 $errors['name']='Pole je povinné';
             }
-
-            foreach($author_list as $author){
-                $authorCheck = preg_replace('/\s+/', '', $author['bookAuthor']);
-                $nameCheck = preg_replace('/\s+/', '', $name);
-                if($nameCheck === $authorCheck){
-                    $errors['name']='Autor již existuje!';
+            if($name !== $author['authorName']){
+                foreach($author_list as $author){
+                    $authorCheck = preg_replace('/\s+/', '', $author['bookAuthor']);
+                    $nameCheck = preg_replace('/\s+/', '', $name);
+                    if($nameCheck === $authorCheck){
+                        $errors['name']='Autor již existuje!';
+                    }
                 }
             }
 
@@ -65,7 +66,7 @@
     include 'include/header.php';
 ?>      
 
-<div class="row">
+<div class="row mx-3">
     <h2 class="col">Úprava autora</h2>
 </div>
         <div class="new_book-form pt-5">

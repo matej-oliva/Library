@@ -35,12 +35,13 @@
             if(empty($name)){
                 $errors['name']='Pole je povinné';
             }
-
-            foreach($genre_list as $genre){
-                $genreCheck = preg_replace('/\s+/', '', $genre['bookgenre']);
-                $nameCheck = preg_replace('/\s+/', '', $name);
-                if($nameCheck === $genreCheck){
-                    $errors['name']='Žánr již existuje!';
+            if($name !== $genre['genreName']){
+                foreach($genre_list as $genre){
+                    $genreCheck = preg_replace('/\s+/', '', $genre['bookgenre']);
+                    $nameCheck = preg_replace('/\s+/', '', $name);
+                    if($nameCheck === $genreCheck){
+                        $errors['name']='Žánr již existuje!';
+                    }
                 }
             }
 
@@ -66,7 +67,7 @@
 ?>      
 
 <div class="row">
-    <h2 class="col">Úprava žánru</h2>
+    <h2 class="col mx-3">Úprava žánru</h2>
 </div>
         <div class="new_book-form pt-5">
             <form method="POST">

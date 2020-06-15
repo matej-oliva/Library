@@ -2,6 +2,7 @@
 <?php
 
 require_once 'include/user.php';
+require 'librarian_required.php';
 
 
 $query = $db->prepare( 
@@ -25,7 +26,7 @@ include 'include/header.php';
             <div class="input-group-prepend">
                 <span class="input-group-text fa fa-search"></span>
             </div>
-            <input class="form-control" id="searchBar" type="text" placeholder="Vyhledat autora">
+            <input class="form-control" id="searchBar" type="text" placeholder="Vyhledat žánr">
         </div>
         <form action="users.php" method="GET" class="col text-right py-2 mr-3">
         <a href="genre_new.php" class="btn btn-success px-4 mt-1">Přidat žánr</a>

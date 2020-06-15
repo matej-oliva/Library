@@ -51,7 +51,7 @@
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon col"><i class="fa fa-feather"></i></span>
-                <input id="name" type="text" class="form-control col w-75<?php echo(!empty($errors['name']) ? ' is-invalid' : ''); ?>" name="name" placeholder="název knihy" value="<?php echo htmlspecialchars(@$name);?>"/>
+                <input id="name" type="text" class="form-control col w-75<?php echo(!empty($errors['name']) ? ' is-invalid' : ''); ?>" name="name" placeholder="jméno autora" value="<?php echo htmlspecialchars(@$name);?>"/>
                 <?php
                     echo (!empty($errors['name'])?'<div class="invalid-feedback">'.$errors['name'].'</div>':'');
                 ?>		

@@ -17,6 +17,14 @@
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
+    <?php
+          if (!empty($_SESSION['user_id'])) {
+            //zjištění role přihlášeného uživatele
+            if ($loggedUser) {
+              $role = (int)$loggedUser['role_id'];
+            }
+          }
+        ?>
         <script>
           window.fbAsyncInit = function() {
             FB.init({
@@ -57,30 +65,46 @@
             ?>
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around">
-                  <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
-                    <span class="fa fa-book"></span>
-                    Knihy
-                  </a>
+                  
                   <?php
-                    if(!empty($_SESSION['user_id'])){
-                      echo '<a id="nav-loans" class="btn btn-light px-4" href="./loaned_books.php">
-                      <span class="fa fa-book-reader"></span>
-                      Vypůjčené knihy
-                    </a>
-                    <a id="nav-authors" class="btn btn-light px-4" href="./authors.php">
-                      <span class="fa fa-feather"></span>
-                      Autoři
-                    </a>
-                    <a id="nav-genres" class="btn btn-light px-4" href="./genres.php">
-                      <span class="fa fa-hat-cowboy"></span>
-                      Žánry
-                    </a>
-                    <a id="nav-profile" class="btn btn-light px-4" href="./profile.php">
-                      <span class="fa fa-user"></span>
-                      Profil
-                    </a>
-                    ';
+                  if (!empty($_SESSION['user_id'])) {
+                    if($role > 0){
+                      echo '
+                      <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
+                        <span class="fa fa-book"></span>
+                        Knihy
+                      </a>
+                      <a id="nav-loans" class="btn btn-light px-4" href="./loaned_books.php">
+                        <span class="fa fa-book-reader"></span>
+                        Vypůjčené knihy
+                      </a>';
+                    }
+                    if($role > 1){
+                      echo '
+                      <a id="nav-authors" class="btn btn-light px-4" href="./authors.php">
+                        <span class="fa fa-feather"></span>
+                        Autoři
+                      </a>
+                      <a id="nav-genres" class="btn btn-light px-4" href="./genres.php">
+                        <span class="fa fa-hat-cowboy"></span>
+                        Žánry
+                      </a>';
+                    }
+                    if($role > 0){
+                      echo '
+                      <a id="nav-profile" class="btn btn-light px-4" href="./profile.php">
+                        <span class="fa fa-user"></span>
+                        Profil
+                      </a>';
+                    }
+                    if($role > 2){
+                      echo '
+                      <a id="nav-users" class="btn btn-light px-4" href="./user_mgmt.php">
+                        <span class="fa fa-user-cog"></span>
+                        Správa uživatelů
+                      </a>';
                     };
+                  }
                   ?> 
           </nav>
         </header>

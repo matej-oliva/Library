@@ -1,14 +1,14 @@
 <?php
 
     require_once 'include/user.php';
-    require 'librarian_required.php';
+    require 'user_required.php';
 
-    $bookID = $_GET['bookID'];
+    $loanID = $_GET['loanID'];
 
     $queryInfo = $db->prepare( 
         'SELECT books.book_id AS bookID, books.name AS bookName, library_loaned_books.loan_id as loanID
         FROM library_loaned_books JOIN books USING (book_id)
-        WHERE book_id = '.$bookID.'
+        WHERE loan_id = '.$loanID.'
         ORDER BY books.name ASC');
     
     $queryInfo->execute();
@@ -42,7 +42,7 @@
     include 'include/header.php';
 ?>      
 
-<div class="row">
+<div class="row mx-3">
     <h2 class="col">Vrácení knihy</h2>
 </div>
         

@@ -1,6 +1,7 @@
 <?php
 
     require_once 'include/user.php';
+    require 'user_required.php';
 
     $bookID = $_GET['bookID'];
 
@@ -40,12 +41,9 @@
             echo '      <div class="col text-right">';
             echo '          <div class="small text-white mt-1">'.'Aktuálně&nbsp;dostupné:&nbsp;'.$availableBooks.'</div>';
             if(!empty($_SESSION['user_id'])){
-                echo '<div class="mt-2"><a href="reservation_form.php" class="btn btn-light px-4">Vypůjčit</a></div>';
+                echo '<div class="mt-2"><a href="./reservation.php?bookID='.$book['bookID'].'" class="btn btn-light px-4">Vypůjčit</a>';
             }
             echo '      </div>';
-            echo '  </div>';
-            echo '  <div class="row">';
-            
             echo '  </div>';
             echo '</article>';
         }

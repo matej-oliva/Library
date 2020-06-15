@@ -1,16 +1,15 @@
 <?php
 
     require_once 'include/user.php';
-    require 'librarian_required.php';
+    require 'user_required.php';
 
-    $bookID = $_GET['bookID'];
+    $loanID = $_GET['loanID'];
 
     $queryInfo = $db->prepare( 
         'SELECT books.book_id AS bookID, books.name AS bookName, library_loaned_books.loan_id as loanID, 
         library_loaned_books.extended as loanExtended, library_loaned_books.loan_expire_date as loanExpDate
         FROM library_loaned_books JOIN books USING (book_id)
-        WHERE book_id = '.$bookID.'
-        ORDER BY books.name ASC');
+        WHERE loan_id = '.$loanID.'');
     
     $queryInfo->execute();
     
@@ -43,12 +42,12 @@
         #endregion pujceni knihy
     };
 
-    $pageTitle="Výpůjčka knihy";
+    $pageTitle="Prodloužení výpůjčky";
     include 'include/header.php';
 ?>      
 
-<div class="row">
-    <h2 class="col">Výpůjčka knihy</h2>
+<div class="row mx-3">
+    <h2 class="col">Prodloužení výpůjčky</h2>
 </div>
         
         <div class="new_book-form pt-5">
