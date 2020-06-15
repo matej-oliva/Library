@@ -71,11 +71,7 @@
     include 'include/header.php';
 ?>      
 
-<div class="row">
-    <h2 class="col mx-3 my-3">Profil</h2>
-</div>
-
-<div class="new_book-form pt-5">
+<div class="new_book-form pt-5 mt-0">
             <form method="POST">
                 <h2 class="text-center mb-4 pl-4">Osobní údaje</h2>
                 <div class="form-group">

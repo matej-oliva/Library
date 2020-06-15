@@ -46,8 +46,8 @@
                 echo '          <div class="small text-white my-1">'.'ID výpůjčky:&nbsp;'.htmlspecialchars($book['loanID']).'</div>';
                 echo '          <div class="row text-right">';
                 echo '              <div class="col text-right">';
-                echo '                  <a href="./book_extension.php?bookID='.$book['bookID'].'" class="btn btn-success btn-sm px-3">Prodloužit</a>';
-                echo '                  <a href="./book_return.php?bookID='.$book['bookID'].'" class="btn btn-light btn-sm px-4">Vrátit</a>';
+                echo '                  <a href="./book_extension.php?loanID='.$book['loanID'].'" class="btn btn-success btn-sm px-3">Prodloužit</a>';
+                echo '                  <a href="./book_return.php?loanID='.$book['loanID'].'" class="btn btn-light btn-sm px-4">Vrátit</a>';
                 echo '              </div>';
                 echo '          </div>';
                 echo '      </div>';

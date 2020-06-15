@@ -42,11 +42,9 @@
     include 'include/header.php';
 ?>
 
-<h2>Přihlášení uživatele</h2>
-
-<div class="login-form">
+<div class="login-form mt-0 pt-5">
     <form method="post">
-        <h2 class="text-center">Přihlásit se</h2>   
+        <h2 class="text-center">Přihlášení</h2>   
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>

@@ -30,7 +30,7 @@
     $roles_query = $db->prepare( 
         'SELECT DISTINCT library_roles.name AS roleName, library_roles.role_id AS roleID  
         FROM library_roles
-        ORDER BY name ASC');
+        ORDER BY name DESC');
 
     $roles_query->execute();
     

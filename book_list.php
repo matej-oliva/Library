@@ -30,7 +30,11 @@
                 <input class="form-control" id="searchBar" type="text" placeholder="Vyhledat knihu, autora, žánr">
             </div>
             <form action="users.php" method="GET" class="col text-right py-2 mr-3">
-            <a href="new_book.php" class="btn btn-success px-4 mt-1">Přidat knihu</a>
+            <?php
+            if($role > 1){
+            echo '<a href="new_book.php" class="btn btn-success px-4 mt-1">Přidat knihu</a>';
+            }
+            ?>
             </form>
         </div>
         
@@ -55,8 +59,10 @@
             echo '          <div class="row text-right">';
             echo '              <div class="col text-right">';
             echo '                  <a href="./reservation.php?bookID='.$book['bookID'].'" class="btn btn-info btn-sm">Vypůjčit</a>';
+            if($role > 1){
             echo '                  <a href="./books_edit.php?bookID='.$book['bookID'].'" class="btn btn-light btn-sm">Upravit</a>';
             echo '                  <a href="./book_delete.php?bookID='.$book['bookID'].'" class="btn btn-danger btn-sm">Smazat</a>';
+            }
             echo '              </div>';
             echo '          </div>';
             echo '      </div>';

@@ -100,9 +100,9 @@
     include 'include/header.php';
 ?>
 
-<h2>Registrace nového uživatele</h2>
 
-<div class="login-form">
+
+<div class="login-form pt-5 mt-0">
     <form method="post">
         <h2 class="text-center">Registrace</h2>   
         <div class="form-group">

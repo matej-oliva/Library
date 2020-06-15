@@ -137,7 +137,7 @@
     $pageTitle="Úprava knihy";
     include 'include/header.php';
 ?>      
-        <div class="row">
+        <div class="row mx-3">
             <h2 class="col">Úprava knihy</h2>
         </div>
         

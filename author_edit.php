@@ -66,7 +66,7 @@
     include 'include/header.php';
 ?>      
 
-<div class="row">
+<div class="row mx-3">
     <h2 class="col">Úprava autora</h2>
 </div>
         <div class="new_book-form pt-5">

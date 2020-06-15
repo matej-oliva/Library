@@ -25,8 +25,8 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #region smazani knihy
         if($bookStock > $bookBor){
-            $loanQuery=$db->prepare('INSERT INTO library_loaned_books (user_id, book_id, loan_start_date, loan_expire_date) 
-            VALUES (:user_id, :bookID, Now(), DATE_ADD(Now(), INTERVAL 1 MONTH));');
+            $loanQuery=$db->prepare('INSERT INTO library_loaned_books (user_id, book_id, loan_start_date, loan_expire_date, extended) 
+            VALUES (:user_id, :bookID, Now(), DATE_ADD(Now(), INTERVAL 1 MONTH), 0);');
             $loanQuery->execute(array(
                 ':user_id'=>$_SESSION['user_id'],
                 ':bookID'=>$bookID
