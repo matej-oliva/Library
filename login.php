@@ -17,6 +17,11 @@
             if(password_verify($_POST['password'],$user['password'])){
                 $_SESSION['user_id']=$user['user_id'];
                 $_SESSION['user_name']=$user['name'];
+
+                //smažeme požadavky na obnovu hesla
+                $forgottenDeleteQuery = $db->prepare('DELETE FROM forgotten_passwords WHERE user_id=:user;');
+                $forgottenDeleteQuery->execute([':user' => $user['user_id']]);
+
                 header('Location: index.php');
                 exit();
             }else{
@@ -37,11 +42,9 @@
     include 'include/header.php';
 ?>
 
-<h2>Přihlášení uživatele</h2>
-
-<div class="login-form">
+<div class="login-form mt-0 pt-5">
     <form method="post">
-        <h2 class="text-center">Přihlásit se</h2>   
+        <h2 class="text-center">Přihlášení</h2>   
         <div class="form-group">
         	<div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
