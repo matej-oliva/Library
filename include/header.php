@@ -10,16 +10,21 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title><?php echo (!empty($pageTitle)?$pageTitle.' - ':'')?>Knihovna</title>
         <script src="https://kit.fontawesome.com/d4998154c5.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css?family=Mirza:400,500,600,700&display=swap&subset=latin-ext"
-            rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Oregano:400,400i&display=swap&subset=latin-ext"
-            rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
+    <?php
+          if (!empty($_SESSION['user_id'])) {
+            //zjištění role přihlášeného uživatele
+            if ($loggedUser) {
+              $role = (int)$loggedUser['role_id'];
+            }
+          }
+        ?>
         <script>
           window.fbAsyncInit = function() {
             FB.init({
@@ -43,7 +48,7 @@
         </script>
         <header class="container bg-dark">
           <div class="row">
-            <h1 class="col text-white py-4 px-2"><a class="text-white no_underline" href="./index.php">Knihovna</a></h1>
+            <h1 class="col text-white py-4 px-2 ml-4"><a class="text-white no_underline" href="./index.php">Knihovna</a></h1>
             <?php
             echo '<div class="col py-4 px-2 text-right">';
             if(!empty($_SESSION['user_id'])){
@@ -60,21 +65,46 @@
             ?>
           </div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around">
-                  <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
-                    <span class="fa fa-book-reader"></span>
-                    Knihy
-                  </a>
+                  
                   <?php
-                    if(!empty($_SESSION['user_id'])){
-                      echo '<a id="nav-plan" class="btn btn-light px-4" href="./loaned_books.php">
-                      <span class="fa fa-feather"></span>
-                      Vypůjčené knihy
-                    </a>
-                    <a id="nav-book-edit" class="btn btn-light px-4" href="books_edit.php">
-                      <span class="fa fa-book"></span>
-                      Správa knih
-                    </a>';
+                  if (!empty($_SESSION['user_id'])) {
+                    if($role > 0){
+                      echo '
+                      <a id="nav-book-list" class="btn btn-light px-4" href="book_list.php">
+                        <span class="fa fa-book"></span>
+                        Knihy
+                      </a>
+                      <a id="nav-loans" class="btn btn-light px-4" href="./loaned_books.php">
+                        <span class="fa fa-book-reader"></span>
+                        Vypůjčené knihy
+                      </a>';
+                    }
+                    if($role > 1){
+                      echo '
+                      <a id="nav-authors" class="btn btn-light px-4" href="./authors.php">
+                        <span class="fa fa-feather"></span>
+                        Autoři
+                      </a>
+                      <a id="nav-genres" class="btn btn-light px-4" href="./genres.php">
+                        <span class="fa fa-hat-cowboy"></span>
+                        Žánry
+                      </a>';
+                    }
+                    if($role > 0){
+                      echo '
+                      <a id="nav-profile" class="btn btn-light px-4" href="./profile.php">
+                        <span class="fa fa-user"></span>
+                        Profil
+                      </a>';
+                    }
+                    if($role > 2){
+                      echo '
+                      <a id="nav-users" class="btn btn-light px-4" href="./user_mgmt.php">
+                        <span class="fa fa-user-cog"></span>
+                        Správa uživatelů
+                      </a>';
                     };
+                  }
                   ?> 
           </nav>
         </header>
