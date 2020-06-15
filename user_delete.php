@@ -14,6 +14,16 @@
     $query->execute();
     
     $user = $query->fetch();
+
+    $BooksQuery = $db->prepare( 
+        'SELECT library_loaned_books.loan_id AS loan_id, user_id as userID
+        FROM library_loaned_books
+        WHERE user_id = '.$userID.'');
+    $BooksQuery->execute();
+    
+    $hasBook = $BooksQuery->fetch();    
+
+
     if(empty($user)){
         echo '<div class="alert alert-info">Nebyly nalezeny žádné knihy.</div>';
     }else{
@@ -22,6 +32,9 @@
     };
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #region smazani knihy
+        if(!empty($hasBook)){
+            echo '<div class="alert alert-danger">Nelze smazat uživatele, pokud má vypůjčené nějaké knihy!</div>';
+        }else{    
         if(empty($errors)){
             
             $delQuery=$db->prepare('DELETE FROM library_users WHERE user_id=?;');
@@ -33,6 +46,7 @@
             exit();
         }
         #endregion smazani knihy
+        }
     };
 
     $pageTitle="Smazání uživatele";

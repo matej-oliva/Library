@@ -13,6 +13,15 @@
     $query->execute();
     
     $author = $query->fetch();
+
+    $BooksQuery = $db->prepare( 
+        'SELECT books.name AS bookName, author_id as authorID
+        FROM books
+        WHERE author_id = '.$authorID.'');
+    $BooksQuery->execute();
+    
+    $hasBook = $BooksQuery->fetch();
+
     if(empty($author)){
         echo '<div class="alert alert-info">Nebyly nalezeny žádní autoři.</div>';
     }else{
@@ -21,7 +30,9 @@
     };
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #region smazani autora
-            
+        if(!empty($hasBook)){
+            echo '<div class="alert alert-danger">Nelze smazat autora, v knihovně jsou knihy s tímto autorem!</div>';
+        }else{    
             $delQuery=$db->prepare('DELETE FROM library_authors WHERE author_id=?;');
             $delQuery->execute(array(
                 $authorID
@@ -30,6 +41,7 @@
             header('Location: authors.php');
             exit();
         #endregion smazani autora
+        }
     };
 
     $pageTitle="Odstranění autora";

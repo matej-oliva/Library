@@ -9,7 +9,6 @@
         'SELECT library_genres.genre_id AS genreID, library_genres.name AS genreName
         FROM library_genres
         WHERE genre_id = '.$genreID.'');
-    
     $query->execute();
     
     $genre = $query->fetch();
@@ -19,9 +18,22 @@
         $genreID = $genre['genreID'];
         $genreName = $genre['genreName'];
     };
+    $BooksQuery = $db->prepare( 
+        'SELECT books.name AS bookName, genre_id as genreID
+        FROM books
+        WHERE genre_id = '.$genreID.'');
+    $BooksQuery->execute();
+    
+    $hasBook = $BooksQuery->fetch();
+
+
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         #region smazani autora
-            
+
+            if(!empty($hasBook)){
+                echo '<div class="alert alert-danger">Nelze smazat žánr, v knihovně jsou knihy s tímto žánrem!</div>';
+            }else{    
             $delQuery=$db->prepare('DELETE FROM library_genres WHERE genre_id=?;');
             $delQuery->execute(array(
                 $genreID
@@ -29,6 +41,7 @@
 
             header('Location: genres.php');
             exit();
+            }
         #endregion smazani autora
     };
 

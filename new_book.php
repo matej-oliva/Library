@@ -93,7 +93,7 @@
                 ':description'=>$description
             ]);
 
-            header('Location: index.php');
+            header('Location: book_list.php');
             exit();
         }
         #endregion nova kniha
